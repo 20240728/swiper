@@ -1,0 +1,2 @@
+OK = 0
+VCODE_CODE = 1000
