@@ -1,4 +1,6 @@
 from django.db import models
+import datetime
+
 
 # Create your models here.
 
@@ -22,6 +24,25 @@ class Users(models.Model):
     avatar = models.CharField(max_length=256, verbose_name='个人形象')
     location = models.CharField(max_length=32, verbose_name='常居住地')
 
+    @property
+    def age(self):
+        '''用户的年龄'''
+        today = datetime.date.today()
+        birth_time = datetime.date(self.birth_year, self.birth_month, self.birth_day)
+        return (today - birth_time).days // 365
+
+    def to_dict(self):
+        return {
+            'nick_name': self.nick_name,
+            'phone_number': self.phone_number,
+            'sex': self.sex,
+            'age': self.age,
+            'birth_year': self.birth_day,
+            'avtar': self.avatar,
+            'location': self.location
+
+        }
+
 
 class Profile(models.Model):
     SEX = (
@@ -41,7 +62,3 @@ class Profile(models.Model):
     vibration = models.BooleanField(default=True, verbose_name='是否开启震动')
     only_matche = models.BooleanField(default=True, verbose_name='是否让匹配人查看相册')
     auto_play = models.BooleanField(default=True, verbose_name='是否自动播放视频')
-
-
-
-
