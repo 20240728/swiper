@@ -1,2 +1,3 @@
 OK = 0
 VCODE_CODE = 1000
+ERROR = 1
